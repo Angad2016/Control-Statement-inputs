@@ -1,0 +1,16 @@
+
+a <- c(rbinom(10,4,0.5))
+
+
+
+ifelse(a>2,"Yes","No")
+# replace negative spend value with 0
+# set up library
+setwd("C:\\Ram\\R for Data Science\\data")
+# read data
+prd_spend <-read.csv(file="prod_spend.csv",
+                     head=T)
+str(prd_spend)
+summary(prd_spend$Spend_Value)
+prd_spend$Spend_Value <- ifelse(prd_spend$Spend_Value <0,0,prd_spend$Spend_Value)
+summary(prd_spend$Spend_Value)
