@@ -1,0 +1,50 @@
+ Inbuilt Loop based fn Lapply, sapply, and apply
+
+?apply
+
+df <- data.frame(a=seq(11,20,1),
+                 b=rnorm(10,mean=50,sd=15),
+                 c=rbinom(10,5,0.15)
+)
+# Finding mean of all columns
+
+summary(df)
+# Get mean of each columns of a data frame
+mean.row <- apply(df,2,mean)
+
+mean.row <- apply(df,2,function(x) quantile(x,0.95))
+
+quantile(df$a,probs = 0.95)
+# Get mean of each row of a data frame
+df$mean.col <- apply(df[,c(1,2,3)],1,mean)
+df$max.col <- apply(df[,c(1,2,3)],1,max)
+
+
+max.row <- apply(df,2,max)
+max.col <- apply(df,1,max)
+
+#
+?sapply
+
+mean.s <- sapply(df,mean)
+mean.l <- lapply(df,mean)
+
+# find missing values for each of the variables
+df1 <- data.frame(var1 = c(12,13,465,676,323,546,NA,12,32,45),
+                  var2 = c(15,6,23,46,NA,124,32,46,35,NA) )
+
+mean(df1$var1, na.rm=T)
+
+miss.cnt <- sapply(df1,function(x) paste(100*sum(is.na(x))/length(x),"%"))
+View(miss.cnt)
+
+avgVal <- function(Vect){
+  len <- length(Vect) - sum(is.na(Vect))
+  sum <- sum(Vect,na.rm =T)
+  sum/len
+}
+v1 <- c(15,6,23,46,NA,124,32,46,35,NA)
+
+avgVal(v1)
+mean(v1,,na.rm =T)
+m1 <- sapply(df1, avgVal)
